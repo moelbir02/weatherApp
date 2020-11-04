@@ -6,7 +6,8 @@
 
 body {
     font-family: 'montserrat', sans-serif;
-    background-image: url('weather.jpg');
+    background-image: url('Heatwave.jpg');
+    /* background-color: rgb(74, 64, 212); */
     background-size: cover;
     background-position: top center;
 }
@@ -30,7 +31,7 @@ header input {
     outline: none;
     background-color: rgba(225, 225, 225, 0.3);
     border-radius: 16px 0px 16px 0px;
-    border-bottom: 3px solid #DF8E00;
+    border-bottom: 3px solid #2358e9;
     color: #133131;
     font-size: 25px;
     font-weight: 300;
