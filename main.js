@@ -6,6 +6,36 @@ const api = {
 const searchbox = document.querySelector('.search-box');
 searchbox.addEventListener('keypress', setQuery);
 
+
+
+
+
+const searchInput = document.getElementById("input");
+function showOrHideTip(show, element) {
+    // show element when show is true, hide when false
+    if (show) {
+      element.style.display = "inherit";
+    } else {
+      element.style.display = "none";
+    }
+  }
+  function isValidInput(input) {
+    return /^[a-z]+$/.test(input);
+  }
+  
+searchInput.addEventListener("input", e => {
+    const text = e.target.value;
+    const valid = isValidUsername(text);
+    const showTip = text !== "" && !valid;
+    const tooltip = e.target.nextElementSibling;
+    showOrHideTip(showTip, tooltip);
+});
+
+
+
+
+
+
 function setQuery (evt) {
     if (evt.keyCode == 13){
         getResults(searchbox.value);
