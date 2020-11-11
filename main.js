@@ -6,32 +6,21 @@ const api = {
 const searchbox = document.querySelector('.search-box');
 searchbox.addEventListener('keypress', setQuery);
 
+const inputErrPara = document.getElementById('ipute-err');
+searchbox.addEventListener('input', isValidInput)
 
+function isValidInput(input) {
+    var pattern = /^[a-z]+$/;
+    var currentValue = e.target.value;
+    var valid = pattern.test(currentValue);
 
-
-
-const searchInput = document.getElementById("input");
-function showOrHideTip(show, element) {
-    // show element when show is true, hide when false
-    if (show) {
-      element.style.display = "inherit";
-    } else {
-      element.style.display = "none";
+    if ( valid) {
+        inputErrPara.style.display = 'none'
+    }else {
+        inputErrPara.style.display = 'block'
     }
-  }
-  function isValidInput(input) {
-    return /^[a-z]+$/.test(input);
-  }
-  
-searchInput.addEventListener("input", e => {
-    const text = e.target.value;
-    const valid = isValidUsername(text);
-    const showTip = text !== "" && !valid;
-    const tooltip = e.target.nextElementSibling;
-    showOrHideTip(showTip, tooltip);
-});
 
-
+}
 
 
 
