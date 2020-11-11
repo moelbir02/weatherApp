@@ -84,12 +84,14 @@ main {
     text-shadow: 0px 4px rgba(0, 0, 0, 0.4);
 }
 
-footer {
+.main-footer {
 
     color: #FFF;
-    border-top: 1px solid #eeeeee;
+    /* border-top: 1px solid #eeeeee; */
     margin-top: 16px;
     padding: 16px 0;
+    text-align: center;
+	padding: 2em 0;	
   
   }
   #input-err{

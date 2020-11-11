@@ -6,22 +6,22 @@ const api = {
 const searchbox = document.querySelector('.search-box');
 searchbox.addEventListener('keypress', setQuery);
 
-const inputErrPara = document.getElementById('ipute-err');
-searchbox.addEventListener('input', isValidInput)
 
-function isValidInput(input) {
-    var pattern = /^[a-z]+$/;
-    var currentValue = e.target.value;
-    var valid = pattern.test(currentValue);
+// searchbox.addEventListener('input', isValidInput)
 
-    if ( valid) {
-        inputErrPara.style.display = 'none'
-    }else {
-        inputErrPara.style.display = 'block'
-    }
-
-}
-
+// function isValidInput(input) {
+    // var pattern = /^[a-z]+$/;
+    // var currentValue = e.target.value;
+    // var valid = pattern.test(currentValue);
+// 
+    // if ( valid) {
+        // inputErrPara.style.display = 'none'
+    // }else {
+        // inputErrPara.style.display = 'block'
+    // }
+// 
+// }
+// 
 
 
 
@@ -29,6 +29,20 @@ function setQuery (evt) {
     if (evt.keyCode == 13){
         getResults(searchbox.value);
     }
+    
+         if ( searchbox.value) {
+            const pattern = /^[a-z]+$/;
+            var currentValue = evt.target.value;
+            var valid = pattern.test(currentValue);
+                        
+              getResults();      
+                
+           }else {
+            //    console.error("Invalid Input");
+            const inputErrPara = document.getElementById('ipute-err');   
+               inputErrPara.style.display = 'block'
+         }
+
 }
 
 function getResults(query) {
