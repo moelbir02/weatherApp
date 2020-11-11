@@ -7,43 +7,30 @@ const searchbox = document.querySelector('.search-box');
 searchbox.addEventListener('keypress', setQuery);
 
 
-// searchbox.addEventListener('input', isValidInput)
-
-// function isValidInput(input) {
-    // var pattern = /^[a-z]+$/;
-    // var currentValue = e.target.value;
-    // var valid = pattern.test(currentValue);
-// 
-    // if ( valid) {
-        // inputErrPara.style.display = 'none'
-    // }else {
-        // inputErrPara.style.display = 'block'
-    // }
-// 
-// }
-// 
-
-
-
-function setQuery (evt) {
-    if (evt.keyCode == 13){
+function setQuery(evt) {
+    let valid = false;
+    // console.log(evt.keyCode)
+    if (evt.keyCode == 13) {
         getResults(searchbox.value);
     }
-    
-         if ( searchbox.value) {
-            const pattern = /^[a-z]+$/;
-            var currentValue = evt.target.value;
-            var valid = pattern.test(currentValue);
-                        
-              getResults();      
-                
-           }else {
+
+    if (searchbox.value) {
+        const pattern = /^[a-z]+$/;
+        var currentValue = evt.target.value;
+        valid = pattern.test(currentValue);
+        if (valid) {
+            console.log("hello")
+            getResults();
+        } else {
             //    console.error("Invalid Input");
-            const inputErrPara = document.getElementById('ipute-err');   
-               inputErrPara.style.display = 'block'
-         }
+            const inputErrPara = document.getElementById('input-err');
+            inputErrPara.style.display = 'block'
+        }
+    }
 
 }
+
+
 
 function getResults(query) {
     fetch(`${api.base}weather?q=${query}&units=metric&APPID=${api.key}`)

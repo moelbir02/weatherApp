@@ -95,7 +95,7 @@ main {
   
   }
   #input-err{
-      color: #FFF;
+      color: red;
       font-size: 16px;
       letter-spacing: 1px;
       margin-top: 0px;
