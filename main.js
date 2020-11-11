@@ -4,6 +4,7 @@ const api = {
 }
 
 const searchbox = document.querySelector('.search-box');
+const inputErrPara = document.getElementById('input-err');
 searchbox.addEventListener('keypress', setQuery);
 
 
@@ -15,15 +16,15 @@ function setQuery(evt) {
     }
 
     if (searchbox.value) {
-        const pattern = /^[a-z]+$/;
+        const pattern = /^[a-zA-Z]+$/;
         var currentValue = evt.target.value;
         valid = pattern.test(currentValue);
         if (valid) {
-            console.log("hello")
+            inputErrPara.style.display = 'none'
             getResults();
         } else {
-            //    console.error("Invalid Input");
-            const inputErrPara = document.getElementById('input-err');
+            
+            
             inputErrPara.style.display = 'block'
         }
     }
