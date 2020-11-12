@@ -7,27 +7,31 @@ const searchbox = document.querySelector('.search-box');
 const inputErrPara = document.getElementById('input-err');
 searchbox.addEventListener('keypress', setQuery);
 
-
 function setQuery(evt) {
     let valid = false;
-   
     if (evt.keyCode == 13) {
-        getResults(searchbox.value);
-    }
-    if (searchbox.value) {
-        const pattern = /^[a-z A-Z]+$/;
-        var currentValue = evt.target.value;
-        valid = pattern.test(currentValue);
-        if (valid) {
-            inputErrPara.style.display = 'none'
-            getResults();
-        } else {    
+        if (searchbox.value || searchbox.value === '') {
+            const pattern = /^[a-z A-Z]+$/;
+            var currentValue = evt.target.value;
+            if (!currentValue) {
+                valid = false ;
+            } 
+            valid = pattern.test(currentValue) 
+            let empty = !currentValue
+            
+            if (valid) {
+                inputErrPara.style.display = 'none'
+                getResults(searchbox.value);
+            } else if (empty) {
+                inputErrPara.style.display = 'block'
+                inputErrPara.innerHTML = 'Please submit a value'
+            } else {
             inputErrPara.style.display = 'block'
+            inputErrPara.innerHTML = 'Invalid input'
+            }
         }
     }
-
 }
-
 
 
 function getResults(query) {
