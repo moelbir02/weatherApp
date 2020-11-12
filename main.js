@@ -10,21 +10,18 @@ searchbox.addEventListener('keypress', setQuery);
 
 function setQuery(evt) {
     let valid = false;
-    // console.log(evt.keyCode)
+   
     if (evt.keyCode == 13) {
         getResults(searchbox.value);
     }
-
     if (searchbox.value) {
-        const pattern = /^[a-zA-Z]+$/;
+        const pattern = /^[a-z A-Z]+$/;
         var currentValue = evt.target.value;
         valid = pattern.test(currentValue);
         if (valid) {
             inputErrPara.style.display = 'none'
             getResults();
-        } else {
-            
-            
+        } else {    
             inputErrPara.style.display = 'block'
         }
     }
