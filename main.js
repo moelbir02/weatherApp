@@ -4,59 +4,69 @@ const api = {
 }
 
 const searchbox = document.querySelector('.search-box');
-const inputErrPara = document.getElementById('input-err');
-searchbox.addEventListener('keypress', setQuery);
+let errorArray = ['Invalid input', 'No result found', 'Please submit a value','Something went wrong, try again later',
+"You are unauthorized" ]
+searchbox.addEventListener('keydown', setQuery);
 
 function setQuery(evt) {
-    let valid = false;
-    if (evt.keyCode == 13) {
-        if (searchbox.value || searchbox.value === '') {
-            const pattern = /^[a-z A-Z]+$/;
-            var currentValue = evt.target.value;
-            if (!currentValue) {
-                valid = false ;
-            } 
-            valid = pattern.test(currentValue) 
-            let empty = !currentValue
-            
-            if (valid) {
-                inputErrPara.style.display = 'none'
-                getResults(searchbox.value);
-            } else if (empty) {
-                inputErrPara.style.display = 'block'
-                inputErrPara.innerHTML = 'Please submit a value'
-            } else {
-            inputErrPara.style.display = 'block'
-            inputErrPara.innerHTML = 'Invalid input'
-            }
-        }
+    const pattern = /^[a-z A-Z]+$/;
+    let currentValue = evt.target.value;
+    let valid = pattern.test(currentValue);
+
+    if(!currentValue && evt.keyCode == 13 ){
+        displayBlockById('input-err');
+        insertInnerHTML('input-err', errorArray[2] )
+    }
+    if(!currentValue && evt.keyCode !== 13){
+        displayNoneById('input-err')
+        displayNoneById('updated-location');
+        displayNoneById('updated-current');
+        displayBlockById('location');
+        displayBlockById('current');
+    }
+    if(!valid && currentValue){
+        displayBlockById('input-err');
+        insertInnerHTML('input-err', errorArray[0])
+    }
+    if (valid && currentValue && evt.keyCode == 13) {
+        getResults(searchbox.value);
     }
 }
 
-
 function getResults(query) {
-    fetch(`${api.base}weather?q=${query}&units=metric&APPID=${api.key}`)
-    .then(weather => {
-        return weather.json();
-    }).then(displayResults);
+    try{
+        fetch(`${api.base}weather?q=${query.trim()}&units=metric&APPID=${api.key}`)
+            .then(weather => weather.json())
+            .then(displayResults)
+            .catch(err)
+    } catch(err){}
 }
 
 function displayResults (weather){
-    let city = document.querySelector('.location .city');
-    city.innerText = `${weather.name}, ${weather.sys.country}`;
+    if(weather.cod === 200){
+        displayNoneById('input-err');
+        displayNoneById('location');
+        displayNoneById('current');
+        displayBlockById('updated-location');
+        displayBlockById('updated-current');
 
-    let now = new Date();
-    let date = document.querySelector('.location .date');
-    date.innerText = dateBuilder(now);
-
-    let temp = document.querySelector('.current .temp');
-    temp.innerHTML = `${Math.round(weather.main.temp)}<span>°C</span>`;
-
-    let weather_el = document.querySelector('.current .weather');
-    weather_el.innerText = weather.weather[0].main;
-
-    let hilow = document.querySelector('.hi-low');
-    hilow.innerText = `${Math.round(weather.main.temp_min)}°C / ${Math.round(weather.main.temp_max)}°C `;
+        let now = new Date();
+        insertInnerText('.updated-location .city', `${weather.name}, ${weather.sys.country}` )
+        insertInnerText('.updated-location .date', dateBuilder(now));
+        insertInnerText('.updated-current .temp', `${Math.round(weather.main.temp)}°C`);
+        insertInnerText('.updated-current .weather', weather.weather[0].main )
+        insertInnerText('.updated-current .hi-low', `${Math.round(weather.main.temp_min)}°C / ${Math.round(weather.main.temp_max)}°C `)
+    } else if(weather.cod === "404"){
+        displayNoneById('updated-location');
+        displayNoneById('updated-current');
+        displayBlockById('input-err');
+        insertInnerHTML('input-err', errorArray[1] )
+    } else if(weather.cod === 401){
+        displayNoneById('updated-location');
+        displayNoneById('updated-current');
+        displayBlockById('input-err');
+        insertInnerHTML('input-err', errorArray[4] )
+    }
 }
 
 function dateBuilder (d) {
@@ -69,5 +79,20 @@ function dateBuilder (d) {
     let year = d.getFullYear();
 
     return `${day} ${date} ${month} ${year}`;
-    
+}
+
+function displayNoneById(id){
+    document.getElementById(id).style.display= 'none';
+}
+
+function displayBlockById(id){
+    document.getElementById(id).style.display= 'block';
+}
+
+function insertInnerHTML(id, text){
+    document.getElementById(id).innerHTML= text;
+}
+
+function insertInnerText(classtag, text){
+    document.querySelector(classtag).innerText= text;
 }

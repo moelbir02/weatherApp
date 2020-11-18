@@ -10,20 +10,27 @@
 <body>
     <div class="app-wrap">
         <header>
-            <input type="text" autocomplet=" off" id="input" class="search-box" placeholder=" Search for a city...."  /> <br>
-
-            
+            <input type="text" autocomplet=" off" id="input" class="search-box" placeholder=" Search for a city...."  /> <br>     
         </header>
         <p id="input-err"> Please enter a valid Input</p>
         <main>
-            <section class="location">
+            <section id="location" class="location">
                 <div class="city">Louisville, USA</div>
                 <div class="date">Friday 25 Septembre 2020</div>
             </section>
-            <div class="current">
+            <section id="updated-location" class="updated-location">
+                <div class="city"></div>
+                <div class="date"></div>
+            </section>
+            <div id="current" class="current">
                 <div class="temp">15 <span>°C</span></div>
                 <div class="weather">Sunny</div>
                 <div class="hi-low">13°C / 18°C</div>
+            </div>
+            <div  id="updated-current" class="updated-current">
+                <div class="temp"></span></div>
+                <div class="weather"></div>
+                <div class="hi-low"></div>
             </div>
         </main>
     </div>
