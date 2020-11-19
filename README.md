@@ -3,5 +3,6 @@ We use the Open Weather Map API to make calls to a restful api to return the cur
 The 3 features that i used to build this App are:
    1- Retrieve data from an external API and display data.
    2- Calculate and display data.
-   3- Implement a regular expression (regex) to ensure and test user input.
+   3- Create array, populate with multiple values, draw one to display.
+   4- Implement a regular expression (regex) to ensure and test user input.
 
