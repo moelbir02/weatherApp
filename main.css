@@ -17,11 +17,22 @@ body {
     min-height: 100vh;
     background-image: linear-gradient(to bottom, rgba(0, 0, 0, 0.3), rgba(0, 0, o, 0.6));
 }
+.header{
+    color: #FFF;
+    font-size: 35px;
+    font-weight: 600;
+    margin-bottom: 5px;
+    padding-top: 50px;
+    text-align: center;
+    text-shadow: 0px 3px rgba(0, 0, 0, 0.4);
+    font-style: italic;    
+}
+    
 header {
     display: flex;
     justify-content: center;
     align-items: center;
-    padding: 50px 15px 15px;       
+    padding: 40px 15px 15px;       
 }
 header input {
     width: 200%;
@@ -91,8 +102,8 @@ main {
     margin-top: 16px;
     padding: 16px 0;
     text-align: center;
-	padding: 2em 0;	
-  
+    padding: 2em 0;	
+     
 }
 #input-err{
     color: red;
