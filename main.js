@@ -4,8 +4,12 @@ const api = {
 }
 
 const searchbox = document.querySelector('.search-box');
-let errorArray = ['Invalid input', 'No result found', 'Please submit a value','Something went wrong, try again later',
-"You are unauthorized" ]
+let errorArray = ['Invalid input', 
+                  'No result found', 
+                  'Please submit a value',
+                  'Something went wrong, try again later',
+                  'You are unauthorized' ];
+
 searchbox.addEventListener('keydown', setQuery);
 
 function setQuery(evt) {
